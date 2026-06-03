@@ -11,9 +11,6 @@ import json
 import base64
 from datetime import datetime
 from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2
-from cryptography.hazmat.backends import default_backend
 from config import BASE_URL, get_auth_headers
 
 session = requests.Session()
