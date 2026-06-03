@@ -31,14 +31,14 @@ def check_health():
             print(f"Response Body (raw):\n{response.text}")
 
         if response.status_code == 200:
-            print("\n✓ API is healthy and reachable!")
+            print("API is healthy and reachable!")
             return True
         else:
-            print(f"\n✗ Unexpected status code: {response.status_code}")
+            print(f"Unexpected status code: {response.status_code}")
             return False
 
     except requests.exceptions.RequestException as e:
-        print(f"✗ Error connecting to API: {e}")
+        print(f"Error connecting to API: {e}")
         return False
 
 

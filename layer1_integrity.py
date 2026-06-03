@@ -37,21 +37,21 @@ def fetch_dataset():
             print(f"Status: {response.status_code}")
             
             if response.status_code == 200:
-                print(f"✓ Successfully fetched from {endpoint}")
+                print(f" Successfully fetched from {endpoint}")
                 return response.content, endpoint
             
             elif response.status_code == 404:
-                print(f"  → Endpoint not found")
+                print(f"Endpoint not found")
             
             else:
-                print(f"  → Status: {response.status_code}")
+                print(f"Status: {response.status_code}")
                 try:
-                    print(f"  → Response: {response.json()}")
+                    print(f"Response: {response.json()}")
                 except:
-                    print(f"  → Response: {response.text[:200]}")
+                    print(f"Response: {response.text[:200]}")
         
         except Exception as e:
-            print(f"  → Error: {e}")
+            print(f"Error: {e}")
     
     return None, None
 
@@ -87,7 +87,7 @@ def analyze_dataset(data):
         return json_data
     
     except json.JSONDecodeError:
-        print(f"  Not valid JSON, binary data")
+        print(f"Not valid JSON, binary data")
         return None
 
 
@@ -115,10 +115,10 @@ def submit_layer1_answer(integrity_hash, dataset_endpoint):
             print(f"Response:\n{json.dumps(result, indent=2)}")
             
             if response.status_code in [200, 201]:
-                print("\n✓ Layer 1 submission accepted!")
+                print("Layer 1 submission accepted!")
                 return True
             else:
-                print(f"\n✗ Submission rejected: {result.get('error')}")
+                print(f"Submission rejected: {result.get('error')}")
                 return False
         
         except json.JSONDecodeError:
@@ -140,10 +140,10 @@ def main():
     data, endpoint = fetch_dataset()
     
     if data is None:
-        print("\n✗ Failed to fetch dataset")
+        print(" Failed to fetch dataset")
         return False
     
-    print(f"\n✓ Dataset size: {len(data)} bytes")
+    print(f" Dataset size: {len(data)} bytes")
     
     # Calculate integrity hashes
     hashes = calculate_integrity_hash(data)
@@ -157,12 +157,12 @@ def main():
     # Save dataset locally for reference
     with open("dataset.bin", "wb") as f:
         f.write(data)
-    print(f"\n✓ Dataset saved to dataset.bin")
+    print(f" Dataset saved to dataset.bin")
     
     # Save hashes
     with open("dataset_hashes.json", "w") as f:
         json.dump(hashes, f, indent=2)
-    print(f"✓ Hashes saved to dataset_hashes.json")
+    print(f" Hashes saved to dataset_hashes.json")
     
     # Submit Layer 1 answer
     # Try SHA256 first (most common for integrity)
